@@ -115,3 +115,6 @@ def add_transaction(item: WalletModel):
     conn.commit()
     conn.close()
     return {"message": "تم تسجيل المعاملة بنجاح"}
+@app.get("/")
+def read_root():
+    return {"status": "ok", "message": "Nexus Omni Backend is running"}
