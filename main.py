@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # تفعيل CORS لجميع المسارات والطلبات
 
-# مسار الصفحة الرئيسية للتأكد من العمل
 @app.route("/")
 def home():
     return jsonify({
@@ -10,7 +11,6 @@ def home():
         "status": "success"
     })
 
-# مسار فحص الحالة
 @app.route("/health")
 def health_check():
     return jsonify({
@@ -18,11 +18,9 @@ def health_check():
         "service": "Nexus Omni"
     })
 
-# 🚀 مسار استقبال البيانات الجديد (POST Request)
 @app.route("/api/v1/data", methods=["POST"])
 def process_data():
     data = request.get_json()
-    # يمكنك هنا معالجة البيانات أو حفظها في قاعدة البيانات
     return jsonify({
         "status": "success",
         "received": data
