@@ -1,4 +1,4 @@
-﻿from flask import Flask, request, jsonify, send_file, send_from_directory
+from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,19 +6,22 @@ from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 from functools import wraps
 from datetime import datetime
 from pathlib import Path
+from waitress import serve
 import os
 import json
 import csv
 import io
 
-env_path = Path(__file__).parent / '.env'
+BASE_DIR = Path(__file__).parent
+
+env_path = BASE_DIR / '.env'
 if env_path.exists():
     for line in env_path.read_text(encoding='utf-8').splitlines():
         if '=' in line and not line.strip().startswith('#'):
             key, value = line.split('=', 1)
             os.environ.setdefault(key.strip(), value.strip())
 
-FLUTTER_WEB_DIR = r'C:\nexus_omni_app\build\web'
+FLUTTER_WEB_DIR = str(BASE_DIR / 'web_app')
 
 app = Flask(__name__, static_folder=FLUTTER_WEB_DIR, static_url_path='')
 CORS(app)
@@ -312,5 +315,5 @@ def import_data(current_user):
         return jsonify({'error': f'حدث خطأ أثناء حفظ البيانات: {str(e)}'}), 500
 
 if __name__ == '__main__':
-    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
-    app.run(host='127.0.0.1', port=5000, debug=debug_mode)
+    print('Nexus Omni Production Server running on http://127.0.0.1:5000')
+    serve(app, host='127.0.0.1', port=5000)
