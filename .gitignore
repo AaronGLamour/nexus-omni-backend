@@ -1,0 +1,25 @@
+# ملفات البيئة والمفاتيح السرية
+.env
+.env.*
+
+# قواعد البيانات المحلية
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# ملفات بايثون المؤقتة والكاش
+__pycache__/
+*.py[cod]
+*$py.class
+
+# البيئات الافتراضية (Virtual Environments)
+venv/
+env/
+.venv/
+
+# ملفات محرر الأكواد والنظام
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

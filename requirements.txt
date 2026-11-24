@@ -1,3 +1,7 @@
-fastapi
-uvicorn
-pydantic
+@'
+Flask
+Flask-CORS
+Flask-SQLAlchemy
+Werkzeug
+itsdangerous
+'@ | Set-Content -Path "requirements.txt" -Encoding UTF8
