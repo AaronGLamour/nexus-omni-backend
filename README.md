@@ -1,24 +1,22 @@
-@'
-# Nexus Omni - Secure Activity & Data Management System
+# Nexus Omni — Full-Stack Secure Activity & Cloud Logging System
 
-A full-stack Client-Server system combining a **Python (Flask)** backend with a production **Flutter Web** frontend served from a single unified endpoint (`http://127.0.0.1:5000`).
+[![Live Demo](https://img.shields.io/badge/Live_Demo-PythonAnywhere-2ea44f?style=for-the-badge)](https://aaronglamour.pythonanywhere.com)
+[![Backend](https://img.shields.io/badge/Backend-Python_Flask_&_Waitress-blue?style=for-the-badge)](https://github.com/AaronGLamour/nexus-omni-backend)
+[![Frontend](https://img.shields.io/badge/Frontend-Flutter_Web-02569B?style=for-the-badge)](https://github.com/AaronGLamour/nexus-omni-frontend)
+
+**Nexus Omni** is a self-contained, portable, and cloud-deployed full-stack web application designed for secure activity tracking, real-time filtering, and structured data reporting.
+
+## Live Production URL
+Access the live cloud deployment directly from any desktop or mobile browser:
+**[https://aaronglamour.pythonanywhere.com](https://aaronglamour.pythonanywhere.com)**
 
 ## Key Features
-- **Authentication & Encryption:** Password hashing (`Werkzeug PBKDF2`) and signed time-limited tokens (`itsdangerous`, 24h validity).
-- **Multi-Tenant Data Isolation:** Complete separation of records per user account.
-- **Full CRUD Operations:** Create, read, update, and delete activity logs with automatic timestamps.
-- **Analytics & Filtering:** Real-time summary cards, instant search, and dynamic app filter chips.
-- **Backup & Reporting:**
-  - Export and restore **JSON** backups with duplicate prevention.
-  - Export **Excel (CSV)** reports with `UTF-8 BOM` encoding.
-  - Safe `Clear All` option per user account with confirmation dialog.
+- **Token-Based Authentication:** Secure user registration and login powered by Werkzeug password hashing and itsdangerous timed cryptographic tokens.
+- **Full CRUD & Activity Logging:** Create, read, update, delete, and bulk-clear timestamped records per authenticated user.
+- **Data Portability & Reporting:** Export user records as formatted JSON backups or UTF-8 CSV/Excel reports, and restore/merge data via JSON file upload with duplicate detection.
+- **Portable Production Architecture:** Bundles the compiled Flutter Web production build (web_app/) directly inside the Flask/Waitress server with dynamic path resolution.
 
-## Tech Stack
-- **Backend:** Python 3, Flask, Flask-SQLAlchemy, Flask-CORS, SQLite
-- **Frontend:** Flutter Web (Material Design, RTL Support, HTTP)
-- **Security:** Signed Tokens (`itsdangerous`), Environment Variables (`.env`)
-
-## Quick Start
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
+## Local Quick Start
+1. Clone: git clone https://github.com/AaronGLamour/nexus-omni-backend.git
+2. Install: pip install -r requirements.txt
+3. Run: Double-click start_nexus.bat (Windows) or run python3 main.py (Linux/macOS).
