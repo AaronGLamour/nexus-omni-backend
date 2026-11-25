@@ -6,6 +6,23 @@ from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 from functools import wraps
 from datetime import datetime
 from pathlib import Path
+import shutil
+from datetime import datetime
+
+def run_auto_backup():
+    try:
+        db_f = BASE_DIR / "nexus_omni.db"
+        if db_f.exists():
+            bk = BASE_DIR / "backups"
+            bk.mkdir(exist_ok=True)
+            stamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+            shutil.copy2(db_f, bk / f"nexus_omni_{stamp}.db")
+            old_files = sorted(bk.glob("nexus_omni_*.db"), key=lambda x: x.stat().st_mtime, reverse=True)[7:]
+            for old in old_files:
+                old.unlink()
+    except Exception as e:
+        print(f"Backup warning: {e}")
+
 from waitress import serve
 import os
 import json
@@ -47,6 +64,7 @@ class Record(db.Model):
 
 with app.app_context():
     db.create_all()
+    run_auto_backup()
 
 def token_required(f):
     @wraps(f)
